@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,17 +10,19 @@ public class PlayerController : MonoBehaviour
     public ContactFilter2D movementFilter;
     public float collisionOffset = 0.05f;
     private Vector2 lastMoveDirection;
+    public MeleeAttack meleeAttack;
 
     Vector2 movementInput;
     Rigidbody2D rb;
     public Animator anim;
 
     List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
-
+    private bool canMove;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        canMove = true;
     }
 
     private void Update()
@@ -29,15 +32,25 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(movementInput != Vector2.zero)
+        if (canMove)
+        {
+            HandleMovement();
+
+        }
+        
+    }
+
+    private void HandleMovement()
+    {
+        if (movementInput != Vector2.zero)
         {
 
             bool canMove = TryMove(movementInput);
 
-            if(!canMove)
+            if (!canMove)
             {
                 canMove = TryMove(new Vector2(movementInput.x, 0));
-                if(!canMove)
+                if (!canMove)
                 {
                     canMove = TryMove(new Vector2(0, movementInput.y));
                 }
@@ -92,5 +105,30 @@ public class PlayerController : MonoBehaviour
     void OnAttack()
     {
         anim.SetTrigger("MeleeAttack1");
+        LockMove();
+        if (movementInput.x < 0)
+        {
+            meleeAttack.AttackLeft();
+            UnlockMove();
+        }
+        else if (movementInput.x > 0)
+        {
+            meleeAttack.AttackRight();
+            UnlockMove();
+        }
+
     }
+
+
+    public void LockMove()
+    {
+            canMove = false;
+    }
+
+    public void UnlockMove()
+    {
+            canMove = true;
+    }
+
+
 }
