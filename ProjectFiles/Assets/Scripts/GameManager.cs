@@ -56,6 +56,8 @@ public class GameManager : MonoBehaviour
         score = 0;
         lives = 3;
         uiManager.ResetHealthBar();
-        
+
+       
     }
+  
 }

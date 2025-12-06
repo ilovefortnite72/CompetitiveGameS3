@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    //player stats
     public float moveSpeed = 5f;
     private float playerHealthValue = 100f;
     public float playerHealth
@@ -32,12 +33,22 @@ public class PlayerController : MonoBehaviour
     public float collisionOffset = 0.05f;
     private Vector2 lastMoveDirection;
     public MeleeAttack meleeAttack;
+    public int AbilityNumber;
+
+
+    // Abilities
+    public FireBallAbility fireBallAbility;
+    private bool canUseAbility = true;
+    private Vector2 lastMousePos;
+
+    //movement ui and anims
 
     Vector2 movementInput;
     Rigidbody2D rb;
     public Animator anim;
     UIManager uiManager;
 
+    //game manager
     public GameObject respawnPos;
 
     List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
@@ -53,6 +64,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         UpdateAnims();
+        lastMousePos = GetMousePos();
     }
 
     private void FixedUpdate()
@@ -128,6 +140,32 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    void OnAbility1(InputValue value)
+    {
+        if (value != null)
+        {
+            Debug.Log("Ability 1 Activated");
+            AbilityNumber = 1;
+        }
+    }
+
+    public void OnAbility2(InputValue value) {
+        if (value != null)
+        {
+            Debug.Log("Ability 2 Activated");
+            AbilityNumber = 2;
+
+        }
+    }
+
+
+    public void OnAbility3(InputValue value) {
+        if (value != null)
+        {
+            Debug.Log("Ability 3 Activated");
+            AbilityNumber = 3;
+        }
+    }
 
     void UpdateAnims()
     {
@@ -153,6 +191,22 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    void AbilityUse()
+    {
+        switch(AbilityNumber)
+        {
+            case 1:
+                Debug.Log("Ability 1 Used");
+                break;
+            case 2:
+                Debug.Log("Ability 2 Used");
+                break;
+            case 3:
+                Debug.Log("Ability 3 Used");
+                break;
+            }
+        }
+
     public void TakeDamage(float damage)
     {
         playerHealth -= 10;
@@ -176,6 +230,14 @@ public class PlayerController : MonoBehaviour
     public void UnlockMove()
     {
             canMove = true;
+    }
+
+
+    private Vector2 GetMousePos()
+    {
+        Vector2 mousePos = Input.mousePosition;
+        Vector2 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+        return worldPos;
     }
 
 }
