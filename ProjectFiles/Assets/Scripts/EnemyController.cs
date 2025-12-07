@@ -12,6 +12,8 @@ public class EnemyController : MonoBehaviour
     public float moveSpeed = 2f;
     Rigidbody2D rb;
     Vector2 direction;
+    private float damageCooldown = 1f;
+    private float lastDamageTime;
 
     public float Health{
         set
@@ -22,7 +24,7 @@ public class EnemyController : MonoBehaviour
             {
                 Debug.Log("Enemy died!");
                 Defeated();
-                // Here you can add code to handle enemy death
+                
             }
         }
         get
@@ -45,12 +47,9 @@ public class EnemyController : MonoBehaviour
         {
             direction = (enemyDetection.detectedEnemies[0].transform.position - transform.position).normalized;
             rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
-            animator.SetBool("isAttacking", true);
+            
         }
-        else
-        {
-            animator.SetBool("isAttacking", false);
-        }
+        
     }
 
     public void Defeated()
@@ -71,9 +70,16 @@ public class EnemyController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+
+
             if (player != null)
             {
+                if (Time.time - lastDamageTime < damageCooldown)
+                {
+                    return;
+                }
                 player.TakeDamage(10);
+                lastDamageTime = Time.time;
             }
             Debug.Log("Player took damage");
             

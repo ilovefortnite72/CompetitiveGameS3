@@ -11,6 +11,7 @@ public class FireballProjectile : MonoBehaviour
     public float burnDamage = 5f;
     public float burnDuration = 4f;
     public float burnTickRate = 1f;
+    public float burnRadius = 1f;
 
     private Vector2 direction;
     private float travelTimer;
@@ -23,7 +24,7 @@ public class FireballProjectile : MonoBehaviour
 
         CircleCollider2D collider = gameObject.AddComponent<CircleCollider2D>();
         collider.isTrigger = true;
-        collider.radius = 0.1f;
+        collider.radius = burnRadius;
 
     }
 
@@ -35,7 +36,7 @@ public class FireballProjectile : MonoBehaviour
         
         if(direction != Vector2.zero)
         {
-                       float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         }
@@ -55,6 +56,7 @@ public class FireballProjectile : MonoBehaviour
         if(travelTimer >= travelTime)
         {
             Explode();
+            travelTimer = travelTime;
         }
     }
 
