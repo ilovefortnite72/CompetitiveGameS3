@@ -2,6 +2,7 @@ using System.IO;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
@@ -15,6 +16,11 @@ public class EnemyController : MonoBehaviour
     private float damageCooldown = 1f;
     private float lastDamageTime;
 
+    public Transform target;
+    NavMeshAgent agent;
+    
+    EnemySpawner spawner;
+
 
     public float Health{
         set
@@ -24,6 +30,7 @@ public class EnemyController : MonoBehaviour
             if (health <= 0)
             {
                 Debug.Log("Enemy died!");
+
                 Defeated();
                 
             }
@@ -40,14 +47,16 @@ public class EnemyController : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         attackbox = GetComponent<BoxCollider2D>();
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent. updateUpAxis = false;
     }
 
     private void FixedUpdate()
     {
         if(enemyDetection.detectedEnemies.Count > 0)
         {
-            direction = (enemyDetection.detectedEnemies[0].transform.position - transform.position).normalized;
-            rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
+            agent.SetDestination(target.position);
             
         }
         
@@ -56,6 +65,8 @@ public class EnemyController : MonoBehaviour
     public void Defeated()
     {
         animator.SetTrigger("die");
+        spawner.RemoveEnemyFromWave(this.gameObject);
+        ClearEnemy();
     }
 
 

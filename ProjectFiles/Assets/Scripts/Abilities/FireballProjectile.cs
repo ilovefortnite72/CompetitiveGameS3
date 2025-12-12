@@ -41,7 +41,7 @@ public class FireballProjectile : MonoBehaviour
 
         }
 
-        rb.linearVelocity = direction * speed;
+        rb.AddForce(direction * speed);
     }
 
     private void Update()

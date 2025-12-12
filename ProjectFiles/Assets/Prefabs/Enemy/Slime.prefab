@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 5521970733425736784}
   - component: {fileID: 2899772188946764173}
   - component: {fileID: 7386161045906492294}
+  - component: {fileID: 1791378630321702503}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Enemy
@@ -184,14 +185,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1520465086898319805}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -255,6 +256,7 @@ MonoBehaviour:
   health: 1
   enemyDetection: {fileID: 7243059134332955473}
   moveSpeed: 0.5
+  target: {fileID: 4432302864366509144, guid: cf221b28fcecd854daa82957e52cc921, type: 3}
 --- !u!95 &2899772188946764173
 Animator:
   serializedVersion: 7
@@ -323,3 +325,25 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.31627196, y: 0.13053668}
   m_EdgeRadius: 0
+--- !u!195 &1791378630321702503
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520465086898319805}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.1
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 0.14
+  m_BaseOffset: 0.07
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

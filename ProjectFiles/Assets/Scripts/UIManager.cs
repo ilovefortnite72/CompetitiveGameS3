@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     public Image ability3;
 
     public TMP_Text healthText;
+    public TMP_Text waveCounter;
 
     public GameObject winScreen;
     public GameObject loseScreen;
@@ -30,9 +31,10 @@ public class UIManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
         healthText = GameObject.Find("HealthText").GetComponent<TMP_Text>();
+        waveCounter = GameObject.Find("TXT_WaveCounter").GetComponent<TMP_Text>();
 
         healthText.text = "Health: " + player.playerHealth.ToString();
-
+        
     }
 
 
@@ -58,6 +60,11 @@ public class UIManager : MonoBehaviour
     public void ChangeHealthText(float playerHealth)
     {
         healthText.text = "Health: " + playerHealth.ToString();
+    }
+
+    public void UpdateWaveCounter(int waveNumber)
+    {
+        waveCounter.text = "Wave" + waveNumber.ToString();
     }
 
     private void ShowCoolDown(int abilityNum, float coolDownLength)

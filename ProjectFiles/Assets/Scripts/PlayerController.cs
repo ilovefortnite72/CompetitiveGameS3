@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     //player stats
     public float moveSpeed = 5f;
+    public bool isAlive;
     private float playerHealthValue = 100f;
     public float playerHealth
     {
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
 
             if (playerHealthValue <= 0)
             {
+                isAlive = false;
                 RespawnPlayer();
             }
         }
@@ -40,6 +42,10 @@ public class PlayerController : MonoBehaviour
     public FireBallAbility fireBallAbility;
     private bool canUseAbility = true;
     private Vector2 lastMousePos;
+    public TornadoAbility tornadoAbility;
+    public float tornadoSpeed;
+    [SerializeField] private Transform spawnPos;
+
 
     //movement ui and anims
 
@@ -136,20 +142,18 @@ public class PlayerController : MonoBehaviour
         GameManager.instance.LoseLife();
         playerHealth = 100;
         uiManager.ChangeHealthText(playerHealth);
+        isAlive = true;
 
 
     }
 
-    void OnAbility1(InputValue value)
+    public void OnAbility1(InputValue value)
     {
         if (value != null && canUseAbility)
         {
             Debug.Log("Ability 1 Activated");
             AbilityNumber = 1;
-
-            Vector2 targetPos = GetMousePos();
-
-            fireBallAbility.TryExecuteAbility(transform.position,targetPos);
+            fireBallAbility.TryExecuteAbility(transform.position,lastMousePos);
 
         }
     }
@@ -158,7 +162,7 @@ public class PlayerController : MonoBehaviour
         if (value != null)
         {
             Debug.Log("Ability 2 Activated");
-            AbilityNumber = 2;
+            tornadoAbility.TryExecuteAbility(transform.position,lastMousePos);
 
         }
     }
@@ -227,9 +231,9 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 GetMousePos()
     {
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = Mathf.Abs(Camera.main.transform.position.z);
-        return Camera.main.ScreenToWorldPoint(mousePos);
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
+        return mousePos;
     }
 
 }
