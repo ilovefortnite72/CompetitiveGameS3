@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1267569474729717114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8342385574357862867}
+  m_Layer: 0
+  m_Name: spawnpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8342385574357862867
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267569474729717114}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4432302864366509144}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2690842012571303450
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,6 +44,7 @@ GameObject:
   - component: {fileID: 8128432127406428824}
   - component: {fileID: 2212065383856116214}
   - component: {fileID: 6053546418498405403}
+  - component: {fileID: 7225822686833894123}
   - component: {fileID: 7985925823773460698}
   - component: {fileID: 6027947876476085265}
   - component: {fileID: 8009583650675477534}
@@ -37,6 +69,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7455486764635365902}
+  - {fileID: 8201846765994985152}
+  - {fileID: 8342385574357862867}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6637080477469045424
@@ -137,6 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
+  isAlive: 0
   movementFilter:
     useTriggers: 0
     useLayerMask: 0
@@ -154,7 +189,10 @@ MonoBehaviour:
   collisionOffset: 0.01
   meleeAttack: {fileID: 8220420834191470691}
   AbilityNumber: 0
-  fireBallAbility: {fileID: 0}
+  fireBallAbility: {fileID: 6053546418498405403}
+  tornadoAbility: {fileID: 7225822686833894123}
+  tornadoSpeed: 5
+  spawnPos: {fileID: 8342385574357862867}
   anim: {fileID: 8009583650675477534}
   respawnPos: {fileID: 0}
 --- !u!114 &6053546418498405403
@@ -179,6 +217,27 @@ MonoBehaviour:
   explosionDamage: 20
   burnDamage: 5
   burnDuration: 4
+  burnTickRate: 1
+--- !u!114 &7225822686833894123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2690842012571303450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6ac253728dbfe44a8e2bf1ff5da44fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tornadoPrefab: {fileID: 5650944197679031668, guid: ac6539be0fd5b4e459d87bec17104c44, type: 3}
+  spawnPoint: {fileID: 4432302864366509144}
+  abilityCooldown: 2
+  speed: 10
+  detectionRadius: 2
+  travelTime: 8
+  burnDamage: 2
+  burnDuration: 6
   burnTickRate: 1
 --- !u!50 &7985925823773460698
 Rigidbody2D:
@@ -368,3 +427,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackCollider: {fileID: 7384211471084268775}
   damage: 10
+--- !u!1 &4363498907563801811
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8201846765994985152}
+  m_Layer: 0
+  m_Name: spawnpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8201846765994985152
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4363498907563801811}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4432302864366509144}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -38,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
         if (!isSpawningWave && aliveEnemies.Count == 0) 
         {
             currentWave++;
-            
+            uiManager.UpdateWaveCounter(currentWave);
             SpawnWave();
         }
     }

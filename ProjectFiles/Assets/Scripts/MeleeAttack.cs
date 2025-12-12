@@ -1,4 +1,3 @@
-using UnityEditor.Build.Content;
 using UnityEngine;
 
 public class MeleeAttack : MonoBehaviour
@@ -28,7 +27,7 @@ public class MeleeAttack : MonoBehaviour
         attackCollider.enabled = false;
     }
 
-    
+
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
@@ -41,7 +40,7 @@ public class MeleeAttack : MonoBehaviour
                 enemy.Health -= damage;
             }
 
-        }            
+        }
     }
 
 }

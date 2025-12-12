@@ -16,7 +16,7 @@ public class FireballProjectile : MonoBehaviour
     private Vector2 direction;
     private float travelTimer;
     private bool hasExploded = false;
-    private Rigidbody2D rb;
+    [SerializeField]public Rigidbody2D rb;
 
     private void Start()
     {
@@ -31,7 +31,7 @@ public class FireballProjectile : MonoBehaviour
 
     public void Initialize(Vector2 moveDirection)
     {
-        direction = moveDirection.normalized;
+        direction = moveDirection;
 
         
         if(direction != Vector2.zero)

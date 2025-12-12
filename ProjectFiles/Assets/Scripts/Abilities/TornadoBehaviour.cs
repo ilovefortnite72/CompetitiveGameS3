@@ -1,6 +1,3 @@
-using System;
-using System.IO;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class TornadoBehaviour : MonoBehaviour
@@ -12,14 +9,17 @@ public class TornadoBehaviour : MonoBehaviour
     private float travelTimer = 5;
     private float travelTime;
 
-    private Vector3 moveDirection;
     private float speed;
     Rigidbody2D rb;
 
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+
+    }
+
     public void Initialize(Vector2 direction)
     {
-        direction = moveDirection.normalized;
-
 
         if (direction != Vector2.zero)
         {
@@ -37,7 +37,7 @@ public class TornadoBehaviour : MonoBehaviour
         {
             return;
         }
-
+        PushEnemies();
         travelTimer += Time.deltaTime;
 
         if (travelTimer >= travelTime)
@@ -56,7 +56,7 @@ public class TornadoBehaviour : MonoBehaviour
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, pushRadius);
         {
-            foreach(Collider2D hit in hits)
+            foreach (Collider2D hit in hits)
             {
                 if (hit.CompareTag("Enemy"))
                 {

@@ -1,5 +1,3 @@
-using System;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class FireBallAbility : MonoBehaviour
@@ -20,7 +18,7 @@ public class FireBallAbility : MonoBehaviour
 
     private bool isOnCooldown = false;
     private float cooldownTimer = 0f;
-    
+
 
     void Update()
     {
@@ -36,20 +34,18 @@ public class FireBallAbility : MonoBehaviour
     }
 
 
-    public bool TryExecuteAbility(Vector2 spawnPosition, Vector2 targetPosition)
+    public bool TryExecuteAbility(Transform spawnPosition, Vector2 targetPosition)
     {
-        if(isOnCooldown)
+        if (isOnCooldown)
         {
             return false;
         }
 
-        if(fireballPrefab == null)
+        if (fireballPrefab == null)
         {
             Debug.Log("No Prefab Assigned for Fireball Ability");
             return false;
         }
-
-        Vector2 direction = (targetPosition - spawnPosition).normalized;
 
         ExecuteAbility(spawnPosition, targetPosition);
 
@@ -59,10 +55,10 @@ public class FireBallAbility : MonoBehaviour
         return true;
     }
 
-    private void ExecuteAbility(Vector2 spawnPosition, Vector2 targetPosition)
+    private void ExecuteAbility(Transform spawnPosition, Vector2 targetPosition)
     {
         GameObject fireballInstance = Instantiate(fireballPrefab, spawnPoint.position, Quaternion.identity);
-        
+
         FireballProjectile projectile = fireballInstance.GetComponent<FireballProjectile>();
 
         projectile.Initialize(targetPosition);

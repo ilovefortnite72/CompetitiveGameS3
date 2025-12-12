@@ -1,7 +1,5 @@
-using System.IO;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
@@ -18,11 +16,12 @@ public class EnemyController : MonoBehaviour
 
     public Transform target;
     NavMeshAgent agent;
-    
+
     EnemySpawner spawner;
 
 
-    public float Health{
+    public float Health
+    {
         set
         {
             health = value;
@@ -32,7 +31,7 @@ public class EnemyController : MonoBehaviour
                 Debug.Log("Enemy died!");
 
                 Defeated();
-                
+
             }
         }
         get
@@ -49,17 +48,17 @@ public class EnemyController : MonoBehaviour
         attackbox = GetComponent<BoxCollider2D>();
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
-        agent. updateUpAxis = false;
+        agent.updateUpAxis = false;
     }
 
     private void FixedUpdate()
     {
-        if(enemyDetection.detectedEnemies.Count > 0)
+        if (enemyDetection.detectedEnemies.Count > 0)
         {
             agent.SetDestination(target.position);
-            
+
         }
-        
+
     }
 
     public void Defeated()
@@ -76,8 +75,7 @@ public class EnemyController : MonoBehaviour
         Destroy(gameObject);
         GameManager.instance.AddScore(10);
     }
-
-    private void OntriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
@@ -94,9 +92,11 @@ public class EnemyController : MonoBehaviour
                 lastDamageTime = Time.time;
             }
             Debug.Log("Player took damage");
-            
+
         }
     }
+
+
 
 
     public void ApplyBurnDamage(float damage, float duration, float tickRate)

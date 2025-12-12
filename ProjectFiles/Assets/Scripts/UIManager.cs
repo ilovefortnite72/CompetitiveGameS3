@@ -22,20 +22,9 @@ public class UIManager : MonoBehaviour
     public GameObject loseScreen;
 
 
-    private void Start()
-    {
-        ability1 = GameObject.Find("Ability1").GetComponent<Image>();
-        ability2 = GameObject.Find("Ability2").GetComponent<Image>();
-        ability3 = GameObject.Find("Ability3").GetComponent<Image>();
 
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-
-        healthText = GameObject.Find("HealthText").GetComponent<TMP_Text>();
-        waveCounter = GameObject.Find("TXT_WaveCounter").GetComponent<TMP_Text>();
-
-        healthText.text = "Health: " + player.playerHealth.ToString();
         
-    }
+    
 
 
     public void RemoveHeart()
@@ -59,17 +48,24 @@ public class UIManager : MonoBehaviour
 
     public void ChangeHealthText(float playerHealth)
     {
+        if (healthText != null)
+        {
+            Debug.Log("null");
+            return;
+        }
         healthText.text = "Health: " + playerHealth.ToString();
     }
 
     public void UpdateWaveCounter(int waveNumber)
     {
+
         waveCounter.text = "Wave" + waveNumber.ToString();
+        Debug.Log(waveCounter.text);
     }
 
     private void ShowCoolDown(int abilityNum, float coolDownLength)
     {
-        // Implementation for showing cooldown on UI
+        
     }
 
     public void WinGame()

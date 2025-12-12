@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Ability 1 Activated");
             AbilityNumber = 1;
-            fireBallAbility.TryExecuteAbility(transform.position,lastMousePos);
+            fireBallAbility.TryExecuteAbility(spawnPos,lastMousePos);
 
         }
     }

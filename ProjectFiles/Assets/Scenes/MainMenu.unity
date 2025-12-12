@@ -243,7 +243,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64af74151ffc0bf4fb39142fbdaec7d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelMenu: {fileID: 0}
 --- !u!114 &363839406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -895,7 +894,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1383523103}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 363839405}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: QuitButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1383523103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1095,7 +1106,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1826549270}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 363839405}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: PlayButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1826549270
 MonoBehaviour:
   m_ObjectHideFlags: 0
